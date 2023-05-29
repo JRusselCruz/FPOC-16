@@ -32,13 +32,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 100),
+            padding: const EdgeInsets.only(top: 70),
             child: Card(
-              child: Card(
-                child: Text(
-                  'Your weekly goals'
-                ),
-              ),
+              child: _buildBody(),
               margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               elevation: 8,
               shape: RoundedRectangleBorder(
@@ -53,11 +49,65 @@ class _UpdateScreenState extends State<UpdateScreen> {
 }
 
 _buildBody() {
-  return ListView(
-    children: <Widget> [
-      Card(
-
-      ),
-    ],
-  )
+  return SizedBox(
+    width: 400,
+    child: Column(
+      children: <Widget> [
+        SizedBox(
+          width: 400,
+          child: Card(
+            margin: const EdgeInsets.fromLTRB(7, 5, 7, 0),
+            elevation: 5,
+            child: Column (
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15.0, 15, 0, 0),
+                  child: Text(
+                    'Your weekly goals',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    'Month of April',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    '1/4',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 0, 0, 15),
+                  child: Text(
+                    'Achieved',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                )
+              ]
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
