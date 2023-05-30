@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TrackingScreen extends StatefulWidget {
-  const TrackingScreen({required Key key}) : super(key: key);
+  const TrackingScreen({Key? key}) : super(key: key);
 
   @override
   State<TrackingScreen> createState() => _TrackingScreenState();
 }
 
 class _TrackingScreenState extends State<TrackingScreen> {
-  final StreamController<String> _monthController = StreamController<String>.broadcast();
+  StreamController<String> _monthController = StreamController<String>.broadcast();
   Stream<String> get monthStream => _monthController.stream;
 
   @override
@@ -29,7 +29,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
   void updateCurrentMonth() {
     var now = DateTime.now();
     var formatter = DateFormat.MMMM();
-    _monthController.add(formatter.format(now));
+    String formattedMonth = formatter.format(now);
+    _monthController.add(formattedMonth);
   }
 
   @override
@@ -51,7 +52,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                   const Text(
                     'Time Tracking',
                     textAlign: TextAlign.start,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -138,32 +139,6 @@ class _TrackingScreenState extends State<TrackingScreen> {
                   ),
                 ],
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'NON-COMPLIANCE WEEK:',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.transparent,
-                    shadows: [Shadow(offset: Offset(0, -3), color: Color.fromARGB(255, 82, 82, 82))],
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 2,
-                    decorationColor: Color.fromARGB(255, 82, 82, 82),
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-                Image.asset(
-                  'assets/icons/logo1.png',
-                  height: 50,
-                  alignment: Alignment.topRight,
-                ),
-              ],
             ),
           ),
         ],
