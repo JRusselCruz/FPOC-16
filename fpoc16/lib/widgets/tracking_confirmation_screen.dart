@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class UpdateScreen extends StatefulWidget {
   const UpdateScreen({super.key});
@@ -8,6 +11,26 @@ class UpdateScreen extends StatefulWidget {
 }
 
 class _UpdateScreenState extends State<UpdateScreen> {
+  final StreamController<String> _monthController = StreamController<String>.broadcast();
+  Stream<String> get monthStream => _monthController.stream;
+
+  @override
+  void initState() {
+    updateCurrentMonth();
+    super.initState();
+  }
+  @override
+  void dispose() {
+    _monthController.close();
+    super.dispose();
+  }
+
+  void updateCurrentMonth() {
+    var now = DateTime.now();
+    var formatter = DateFormat.MMMM();
+    _monthController.add(formatter.format(now));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,22 +72,22 @@ class _UpdateScreenState extends State<UpdateScreen> {
   }
 }
 
-_buildBody() {
+Widget _buildBody() {
   return SizedBox(
     width: 400,
     height: 300,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget> [
+      children: <Widget>[
         SizedBox(
           width: 400,
           child: Card(
             margin: const EdgeInsets.fromLTRB(7, 5, 7, 0),
             elevation: 1.5,
-            child: Column (
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Padding(
+              children: [
+                const Padding(
                   padding: EdgeInsets.fromLTRB(15.0, 15, 0, 0),
                   child: Text(
                     'Your weekly goals',
@@ -76,27 +99,34 @@ _buildBody() {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    'Month of April',
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: Colors.grey
-                    ),
-                    textAlign: TextAlign.start,
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: StreamBuilder<String>(
+                    stream: monthStream,
+                    initialData: '',
+                    builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      String currentMonth = snapshot.data ?? '';
+                      return Text(
+                        'Month of $currentMonth',
+                        style: const TextStyle(
+                          fontSize: 10,
+                          color: Colors.grey,
+                        ),
+                        textAlign: TextAlign.start,
+                      );
+                    },
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 20.0),
                   child: Text(
                     '1/4',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 30
+                      fontSize: 30,
                     ),
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(20, 0, 0, 15),
                   child: Text(
                     'Achieved',
@@ -105,8 +135,8 @@ _buildBody() {
                       color: Colors.grey,
                     ),
                   ),
-                )
-              ]
+                ),
+              ],
             ),
           ),
         ),
@@ -124,7 +154,7 @@ _buildBody() {
                   shadows: [Shadow(offset: Offset(0, -3), color: Color.fromARGB(255, 82, 82, 82))],
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
-                  decorationColor: Color.fromARGB(255, 82, 82, 82)
+                  decorationColor: Color.fromARGB(255, 82, 82, 82),
                 ),
                 textAlign: TextAlign.start,
               ),
@@ -132,8 +162,8 @@ _buildBody() {
                 'assets/icons/logo1.png',
                 height: 50,
                 alignment: Alignment.topRight,
-              )
-            ]
+              ),
+            ],
           ),
         ),
       ],
