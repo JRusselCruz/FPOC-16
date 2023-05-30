@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class UpdateScreen extends StatefulWidget {
-  const UpdateScreen({super.key});
+class TrackingScreen extends StatefulWidget {
+  const TrackingScreen({super.key});
 
   @override
-  State<UpdateScreen> createState() => _UpdateScreenState();
+  State<TrackingScreen> createState() => _TrackingScreenState();
 }
 
-class _UpdateScreenState extends State<UpdateScreen> {
+class _TrackingScreenState extends State<TrackingScreen> {
   final StreamController<String> _monthController = StreamController<String>.broadcast();
   Stream<String> get monthStream => _monthController.stream;
 
