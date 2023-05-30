@@ -16,6 +16,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
           Container(
             height: 160,
             child: AppBar(
+              backgroundColor: const Color.fromARGB(255, 95, 36, 159),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -36,7 +37,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
             child: Card(
               child: _buildBody(),
               margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              elevation: 8,
+              elevation: 1,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -51,13 +52,15 @@ class _UpdateScreenState extends State<UpdateScreen> {
 _buildBody() {
   return SizedBox(
     width: 400,
+    height: 300,
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget> [
         SizedBox(
           width: 400,
           child: Card(
             margin: const EdgeInsets.fromLTRB(7, 5, 7, 0),
-            elevation: 5,
+            elevation: 1.5,
             child: Column (
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
@@ -105,6 +108,32 @@ _buildBody() {
                 )
               ]
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'NON-COMPLIANCE WEEK:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.transparent,
+                  shadows: [Shadow(offset: Offset(0, -3), color: Color.fromARGB(255, 82, 82, 82))],
+                  decoration: TextDecoration.underline,
+                  decorationThickness: 2,
+                  decorationColor: Color.fromARGB(255, 82, 82, 82)
+                ),
+                textAlign: TextAlign.start,
+              ),
+              Image.asset(
+                'assets/icons/logo1.png',
+                height: 50,
+                alignment: Alignment.topRight,
+              )
+            ]
           ),
         ),
       ],
